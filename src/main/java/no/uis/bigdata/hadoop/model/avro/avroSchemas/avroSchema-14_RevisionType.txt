@@ -1,0 +1,43 @@
+{
+  "name" : "RevisionType",
+  "namespace" : "no.uis.bigdata.hadoop.model.avro",
+  "type" : "record",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "parentid",
+    "type" : [ "null", "string" ],
+    "default" : "null"
+  }, {
+    "name" : "timestamp",
+    "type" : "no.uis.bigdata.hadoop.model.avro._Date"
+  }, {
+    "name" : "contributor",
+    "type" : "no.uis.bigdata.hadoop.model.avro.ContributorType"
+  }, {
+    "name" : "minor",
+    "type" : [ "null", "no.uis.bigdata.hadoop.model.avro._Reference" ],
+    "default" : "null"
+  }, {
+    "name" : "comment",
+    "type" : [ "null", "no.uis.bigdata.hadoop.model.avro.CommentType" ],
+    "default" : "null"
+  }, {
+    "name" : "text",
+    "type" : "no.uis.bigdata.hadoop.model.avro.TextType"
+  }, {
+    "name" : "sha1",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "model",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "format",
+    "type" : "string",
+    "default" : ""
+  } ]
+}
