@@ -1,40 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:hdp="http://www.springframework.org/schema/hadoop"
-       xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:utils="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
-       http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-lazy-init="true">
     <context:annotation-config/>
     <aop:aspectj-autoproxy/>
     <context:spring-configured/>
 
     <context:component-scan base-package="no.uis.bigdata.hadoop"/>
-    <hdp:configuration>
-        <![CDATA[
-        xmlinput.start=<page>
-        xmlinput.end=</page>
-        ]]>
-    </hdp:configuration>
-
-    <utils:properties id="job1-props">
-        <prop key="avro.schema.output.key">#{T(no.uis.bigdata.hadoop.model.avro.Page).Schema}</prop>
-        <prop key="avro.output.codec">#{T(no.uis.bigdata.hadoop.model.avro.Page).Schema}</prop>
-    </utils:properties>
-    <hdp:job id="job1"
-             properties-ref="job1-props"
-             output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
-             input-format="no.uis.bigdata.hadoop.xmlreader.XmlInputFormat"
-             input-path="data/xaa"
-             output-path="data/r/#{T(java.lang.Math).random()}"
-             mapper="no.uis.bigdata.hadoop.mapreduce.MapClass"
-             reducer="no.uis.bigdata.hadoop.mapreduce.Reduce"
-            />
-    <hdp:job-runner id="myjobRunner" job-ref="job1" run-at-startup="true" verbose="true" wait-for-completion="true"/>
-    <oxm:jaxb2-marshaller id="marshaller" contextPath="no.uis.bigdata.hadoop.model.jaxb"/>
+   <import resource="applicationContext-xml-to-avro.xml"/>
+   <!--<import resource="applicationContext-mapreduce-examples.xml"/>-->
 </beans>

@@ -1,6 +1,0 @@
-{
-  "name" : "CaseType",
-  "namespace" : "no.uis.bigdata.hadoop.model.avro",
-  "type" : "enum",
-  "symbols" : [ "FIRST_LETTER", "CASE_SENSITIVE", "CASE_INSENSITIVE", "UNSET" ]
-}

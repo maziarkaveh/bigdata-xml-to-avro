@@ -1,0 +1,11 @@
+{
+  "name" : "_Reference",
+  "namespace" : "no.uis.bigdata.hadoop.common.model.avro",
+  "type" : "record",
+  "doc" : "A reference to an entity, similar to the IDREF object in XML schemas",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "default" : ""
+  } ]
+}

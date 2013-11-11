@@ -1,0 +1,6 @@
+{
+  "name" : "DeletedFlagType",
+  "namespace" : "no.uis.bigdata.hadoop.common.model.avro",
+  "type" : "enum",
+  "symbols" : [ "DELETED", "UNSET" ]
+}

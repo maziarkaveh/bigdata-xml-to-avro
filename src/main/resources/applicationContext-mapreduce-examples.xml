@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:hdp="http://www.springframework.org/schema/hadoop"
+       xmlns:utils="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+
+       http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true">
+
+
+    <hdp:configuration>
+
+    </hdp:configuration>
+
+    <utils:properties id="job-word-count-avro-props">
+         <prop key="avro.schema.input.key">#{T(no.uis.bigdata.hadoop.common.model.avro.Page).Schema}</prop>
+     </utils:properties>
+    <hdp:job id="job-word-count-avro"
+             properties-ref="job-word-count-avro-props"
+             output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
+             input-format="org.apache.avro.mapreduce.AvroKeyInputFormat"
+             input-path="data/avrofiles/xaa.avro"
+             output-path="data/avrofiles/r/#{T(java.lang.Math).random()}"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.avro.maps.WordCountMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.WordCountReduce"
+            />
+    <hdp:job-runner id="myjobRunner" job-ref="job-word-count-avro" run-at-startup="true" verbose="true" wait-for-completion="true"/>
+ </beans>

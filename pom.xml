@@ -16,7 +16,7 @@
                 <artifactId>schemagen-plugin</artifactId>
                  <configuration>
                     <outputDirectory>src/main/dd/</outputDirectory>
-                    <packageName>no.uis.bigdata.hadoop.model</packageName>
+                    <packageName>no.uis.bigdata.hadoop.xmltoavro.model</packageName>
 
                     <schemaFiles>
                         <schema>src/main/resources/page.xsd</schema>

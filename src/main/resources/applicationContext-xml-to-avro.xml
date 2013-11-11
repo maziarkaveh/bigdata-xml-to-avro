@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:hdp="http://www.springframework.org/schema/hadoop"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:utils="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+
+       http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+       http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true">
+
+
+     <hdp:configuration>
+        <![CDATA[
+        xmlinput.start=<page>
+        xmlinput.end=</page>
+        ]]>
+    </hdp:configuration>
+
+    <utils:properties id="job1-props">
+        <prop key="avro.schema.output.key">#{T(no.uis.bigdata.hadoop.common.model.avro.Page).Schema}</prop>
+    </utils:properties>
+    <hdp:job id="job1"
+             properties-ref="job1-props"
+             output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
+             input-format="no.uis.bigdata.hadoop.xmltoavro.xmlreader.XmlInputFormat"
+             input-path="data/xmlfiles/xaa"
+             compress-output="false"
+
+             output-path="data/xmlfiles/r/#{T(java.lang.Math).random()}"
+             mapper="no.uis.bigdata.hadoop.xmltoavro.mapreduce.MapClass"
+             reducer="no.uis.bigdata.hadoop.xmltoavro.mapreduce.Reduce"
+            />
+    <hdp:job-runner id="myjobRunner" job-ref="job1" run-at-startup="true" verbose="true" wait-for-completion="true"/>
+    <oxm:jaxb2-marshaller id="marshaller" contextPath="no.uis.bigdata.hadoop.common.model.jaxb"/>
+</beans>

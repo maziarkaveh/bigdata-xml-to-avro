@@ -1,0 +1,14 @@
+{
+  "name" : "LogTextType",
+  "namespace" : "no.uis.bigdata.hadoop.common.model.avro",
+  "type" : "record",
+  "fields" : [ {
+    "name" : "value",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "deleted",
+    "type" : [ "null", "no.uis.bigdata.hadoop.common.model.avro.DeletedFlagType" ],
+    "default" : "null"
+  } ]
+}

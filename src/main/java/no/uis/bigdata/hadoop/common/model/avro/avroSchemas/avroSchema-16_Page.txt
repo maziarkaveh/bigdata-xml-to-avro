@@ -1,0 +1,37 @@
+{
+  "name" : "Page",
+  "namespace" : "no.uis.bigdata.hadoop.common.model.avro",
+  "type" : "record",
+  "fields" : [ {
+    "name" : "title",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "ns",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "id",
+    "type" : "string",
+    "default" : ""
+  }, {
+    "name" : "redirect",
+    "type" : [ "null", "no.uis.bigdata.hadoop.common.model.avro.RedirectType" ],
+    "default" : "null"
+  }, {
+    "name" : "restrictions",
+    "type" : [ "null", "string" ],
+    "default" : "null"
+  }, {
+    "name" : "revisionOrUpload",
+    "type" : [ "null", {
+      "type" : "array",
+      "items" : [ "no.uis.bigdata.hadoop.common.model.avro.RevisionType", "no.uis.bigdata.hadoop.common.model.avro.UploadType" ]
+    } ],
+    "default" : "null"
+  }, {
+    "name" : "discussionthreadinginfo",
+    "type" : [ "null", "no.uis.bigdata.hadoop.common.model.avro.DiscussionThreadingInfo" ],
+    "default" : "null"
+  } ]
+}
