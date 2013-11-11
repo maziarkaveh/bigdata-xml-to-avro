@@ -19,12 +19,13 @@
      </utils:properties>
     <hdp:job id="job-word-count-avro"
              properties-ref="job-word-count-avro-props"
-             output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
+             output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
              input-format="org.apache.avro.mapreduce.AvroKeyInputFormat"
              input-path="data/avrofiles/xaa.avro"
              output-path="data/avrofiles/r/#{T(java.lang.Math).random()}"
              mapper="no.uis.bigdata.hadoop.mapreduceexample.avro.maps.WordCountMap"
-             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.WordCountReduce"
+
             />
+    <!--reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.WordCountReduce"-->
     <hdp:job-runner id="myjobRunner" job-ref="job-word-count-avro" run-at-startup="true" verbose="true" wait-for-completion="true"/>
  </beans>
