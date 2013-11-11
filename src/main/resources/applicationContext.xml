@@ -30,8 +30,8 @@
              properties-ref="job1-props"
              output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
              input-format="no.uis.bigdata.hadoop.xmlreader.XmlInputFormat"
-             input-path="/Users/maziarkaveh/Downloads/code/hadoop/data/enwiki-latest-pages-articles_splitaa.xml"
-             output-path="/Users/maziarkaveh/Downloads/code/hadoop/data/r/#{T(java.lang.Math).random()}"
+             input-path="data/xaa"
+             output-path="data/r/#{T(java.lang.Math).random()}"
              mapper="no.uis.bigdata.hadoop.mapreduce.MapClass"
              reducer="no.uis.bigdata.hadoop.mapreduce.Reduce"
             />
