@@ -11,7 +11,7 @@
        default-lazy-init="true">
 
 
-     <hdp:configuration>
+    <hdp:configuration>
         <![CDATA[
         xmlinput.start=<page>
         xmlinput.end=</page>
@@ -20,18 +20,25 @@
 
     <utils:properties id="job1-props">
         <prop key="avro.schema.output.key">#{T(no.uis.bigdata.hadoop.common.model.avro.Page).Schema}</prop>
+        <prop key="xml.class.input.key">no.uis.bigdata.hadoop.common.model.jaxb.Page</prop>
     </utils:properties>
     <hdp:job id="job1"
              properties-ref="job1-props"
              output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
-             input-format="no.uis.bigdata.hadoop.xmltoavro.xmlreader.XmlInputFormat"
+             input-format="no.uis.bigdata.hadoop.xmltoavro.xmlreader.XmlValueInputFormat"
              input-path="data/xmlfiles/xaa"
              compress-output="false"
 
-             output-path="data/xmlfiles/r/#{T(java.lang.Math).random()}"
+             output-path="data/xmlfiles/r/#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
              mapper="no.uis.bigdata.hadoop.xmltoavro.mapreduce.MapClass"
              reducer="no.uis.bigdata.hadoop.xmltoavro.mapreduce.Reduce"
             />
-    <hdp:job-runner id="myjobRunner" job-ref="job1" run-at-startup="true" verbose="true" wait-for-completion="true"/>
+    <!--<bean class="com.c4_soft.util.hadoop.avro.AvroJobInitializingBean">-->
+        <!--<constructor-arg ref="billsByProductIdIndexer"/>-->
+        <!--<property name="avroInputKey" value="com.c4_soft.hadoop.avro.SerializableBill" />-->
+        <!--<property name="avroMapOutputValue" value="com.c4_soft.hadoop.avro.SerializableBill" />-->
+        <!--<property name="avroOutputKey" value="com.c4_soft.hadoop.avro.LongIndexedSerializableBill" />-->
+    <!--</bean>-->
+    <hdp:job-runner id="myjobRunner" job-ref="job1" run-at-startup="false" verbose="true" wait-for-completion="true"/>
     <oxm:jaxb2-marshaller id="marshaller" contextPath="no.uis.bigdata.hadoop.common.model.jaxb"/>
 </beans>

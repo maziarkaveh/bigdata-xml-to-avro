@@ -274,7 +274,7 @@
 
         <!--<dependency>-->
             <!--<groupId>org.apache.hive</groupId>-->
-            <!--<artifactId>hive-service</artifactId>-->
+            <!--<artifactId>hive-parser</artifactId>-->
             <!--<version>${hive.version}</version>-->
         <!--</dependency>-->
         <dependency>

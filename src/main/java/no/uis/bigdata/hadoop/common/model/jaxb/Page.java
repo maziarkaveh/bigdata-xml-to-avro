@@ -8,6 +8,11 @@
 
 package no.uis.bigdata.hadoop.common.model.jaxb;
 
+import no.uis.bigdata.hadoop.common.model.XMLConvertible;
+import no.uis.bigdata.hadoop.common.model.jaxb.parser.XMLPageMarshaller;
+import no.uis.bigdata.hadoop.common.model.jaxb.parser.XMLPageUnMarshaller;
+
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -51,7 +56,7 @@ import java.util.List;
         "revisionOrUpload",
         "discussionthreadinginfo"
 })
-public class Page {
+public class Page implements XMLConvertible<Page> {
 
     @XmlElement(required = true)
     protected String title;
@@ -69,6 +74,17 @@ public class Page {
     })
     protected List<Object> revisionOrUpload;
     protected DiscussionThreadingInfo discussionthreadinginfo;
+
+
+    @Override
+    public String marshall(Page page) throws JAXBException {
+        return XMLPageMarshaller.marshallToString(page);
+    }
+
+    @Override
+    public Page unMarshall(String str) throws JAXBException {
+        return XMLPageUnMarshaller.unMarshallFromString(str);
+    }
 
     /**
      * Gets the value of the title property.

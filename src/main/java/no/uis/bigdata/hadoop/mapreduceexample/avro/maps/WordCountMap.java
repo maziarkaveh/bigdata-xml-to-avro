@@ -10,19 +10,20 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class WordCountMap extends Mapper<AvroKey<Page>, NullWritable, Text, NullWritable> {
+public class WordCountMap extends Mapper<AvroKey<Page>, NullWritable, Text, LongWritable> {
     @Override
     protected void map(AvroKey<Page> key, NullWritable value, Context context) throws IOException, InterruptedException {
         for (Object o : key.datum().revisionOrUpload) {
-            if(o instanceof RevisionType){
-                RevisionType revisionType=(RevisionType) o;
-                System.out.println(new Text(revisionType.text.value.toString()));
-                context.write(new Text(revisionType.text.value.toString()), NullWritable.get());
+            if (!(o instanceof RevisionType)) {
+                continue;
+            }
+            RevisionType revisionType = (RevisionType) o;
+            for (String s : revisionType.text.value.toString().split(" ")) {
+                context.write(new Text(s), new LongWritable(1));
             }
         }
-
     }
 
-
-
 }
+
+

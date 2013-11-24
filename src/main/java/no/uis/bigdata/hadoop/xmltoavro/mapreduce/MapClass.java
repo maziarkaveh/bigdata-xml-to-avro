@@ -1,25 +1,24 @@
 package no.uis.bigdata.hadoop.xmltoavro.mapreduce;
 
-import no.uis.bigdata.hadoop.xmltoavro.model.PageWrapperWritable;
-import no.uis.bigdata.hadoop.xmltoavro.service.XMLPageUnMarshaller;
+import no.uis.bigdata.hadoop.common.model.jaxb.Page;
+import no.uis.bigdata.hadoop.xmltoavro.model.XmlValue;
+import org.apache.avro.mapred.AvroValue;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class MapClass extends Mapper<LongWritable, Text,  PageWrapperWritable,NullWritable> {
+public class MapClass extends Mapper<LongWritable  ,XmlValue<Page>, Text, AvroValue<no.uis.bigdata.hadoop.common.model.avro.Page>> {
 
-    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        PageWrapperWritable pageWrapperWritable = null;
+    public void map(LongWritable key, XmlValue<Page> value, Context context) throws IOException, InterruptedException {
         try {
 
-            pageWrapperWritable = new PageWrapperWritable(XMLPageUnMarshaller.unMarshallFromString(value.toString()));
+            no.uis.bigdata.hadoop.common.model.avro.Page page = new no.uis.bigdata.hadoop.common.model.avro.Page(value.getData());
+            AvroValue<no.uis.bigdata.hadoop.common.model.avro.Page> avroValue = new AvroValue<no.uis.bigdata.hadoop.common.model.avro.Page>(page);
+            context.write(new Text(page.id.toString()), avroValue);
         } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
-        context.write(  pageWrapperWritable,NullWritable.get());
     }
 }
