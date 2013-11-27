@@ -20,6 +20,7 @@
             </list>
         </property>
     </bean>
+
     <oxm:jaxb2-marshaller id="marshaller" contextPath="no.uis.bigdata.hadoop.common.model.jaxb"/>
 
     <context:component-scan base-package="no.uis.bigdata.hadoop"/>
