@@ -11,18 +11,18 @@
     <build>
 
         <plugins>
-            <plugin>
+           <!-- <plugin>
                 <groupId>com.nokia.util.avro</groupId>
                 <artifactId>schemagen-plugin</artifactId>
                  <configuration>
                     <outputDirectory>src/main/dd/</outputDirectory>
-                    <packageName>no.uis.bigdata.hadoop.xmltoavro.model</packageName>
+                    <packageName>no.uis.bigdata.hadoop.xml.model</packageName>
 
                     <schemaFiles>
                         <schema>src/main/resources/page.xsd</schema>
                     </schemaFiles>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!--<plugin>-->
             <!--<groupId>org.apache.avro</groupId>-->
             <!--<artifactId>avro-maven-plugin</artifactId>-->

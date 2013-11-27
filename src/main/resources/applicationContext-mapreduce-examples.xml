@@ -2,15 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:hdp="http://www.springframework.org/schema/hadoop"
        xmlns:utils="http://www.springframework.org/schema/util"
-
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-
        http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        default-lazy-init="true">
-
-
-
     <hdp:configuration>
         <![CDATA[
         xmlinput.start=<page>
@@ -28,44 +23,63 @@
              properties-ref="job-word-count-avro-props"
              output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
              input-format="org.apache.avro.mapreduce.AvroKeyInputFormat"
-             input-path="data/avrofiles/xab.avro"
-             output-path="data/avrofiles/r/job-word-count-avro#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
-             combiner="no.uis.bigdata.hadoop.mapreduceexample.avro.combiners.WordCountCombiner"
-             mapper="no.uis.bigdata.hadoop.mapreduceexample.avro.maps.WordCountMap"
-             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.WordCountReduce"
+             input-path="${input.path.avro}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.WordCountReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.avro.WordCountMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.WordCountReduce"
             />
     <hdp:job id="job-contributors-statistics-avro"
              properties-ref="job-word-count-avro-props"
              output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
              input-format="org.apache.avro.mapreduce.AvroKeyInputFormat"
-             input-path="data/avrofiles/part-r-00000.avro"
-             output-path="data/avrofiles/r/job-contributors-statistics-avro#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
-             combiner="no.uis.bigdata.hadoop.mapreduceexample.avro.combiners.ContributorsStatisticsCombiner"
-             mapper="no.uis.bigdata.hadoop.mapreduceexample.avro.maps.ContributorsStatisticsMap"
-             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.ContributorsStatisticsReduce"
+             input-path="${input.path.avro}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.ContributorsStatisticsReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.avro.ContributorsStatisticsMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.ContributorsStatisticsReduce"
             />
     <hdp:job id="job-referred-page-statistics-avro"
 
              properties-ref="job-word-count-avro-props"
              output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
              input-format="org.apache.avro.mapreduce.AvroKeyInputFormat"
-             input-path="data/avrofiles/part-r-00000.avro"
-             output-path="data/avrofiles/r/job-referred-page-statistics-avro#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
-             combiner="no.uis.bigdata.hadoop.mapreduceexample.avro.combiners.ReferredPageStatisticsCombiner"
-             mapper="no.uis.bigdata.hadoop.mapreduceexample.avro.maps.ReferredPageStatisticsMap"
-             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.ReferredPageStatisticsReduce"
+             input-path="${input.path.avro}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.ReferredPageStatisticsReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.avro.ReferredPageStatisticsMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.ReferredPageStatisticsReduce"
             />
     <hdp:job id="job-referred-page-statistics-xml"
 
              properties-ref="xml-props"
              output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
-             input-format="no.uis.bigdata.hadoop.xmltoavro.xmlreader.XmlKeyInputFormat"
-             input-path="data/xmlfiles/enwiki-latest-pages-articles_splitaa.xml"
-             output-path="data/avrofiles/r/job-referred-page-statistics-avro#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
-             combiner="no.uis.bigdata.hadoop.mapreduceexample.avro.combiners.ReferredPageStatisticsCombiner"
-             mapper="no.uis.bigdata.hadoop.mapreduceexample.xml.maps.ReferredPageStatisticsMap"
-             reducer="no.uis.bigdata.hadoop.mapreduceexample.avro.reducers.ReferredPageStatisticsReduce"
+             input-format="no.uis.bigdata.hadoop.xml.xmlreader.XmlKeyInputFormat"
+             input-path="${input.path.xml}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.ReferredPageStatisticsReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.xml.ReferredPageStatisticsMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.ReferredPageStatisticsReduce"
             />
-    <hdp:job-runner id="myjobRunner" job-ref="job-referred-page-statistics-xml"  run-at-startup="true" verbose="true"
-                    wait-for-completion="true"/>
+    <hdp:job id="job-word-count-xml"
+             properties-ref="xml-props"
+             output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
+             input-format="no.uis.bigdata.hadoop.xml.xmlreader.XmlKeyInputFormat"
+             input-path="${input.path.xml}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.WordCountReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.xml.WordCountMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.WordCountReduce"
+            />
+    <hdp:job id="job-contributors-statistics-xml"
+             properties-ref="xml-props"
+             output-format="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"
+             input-format="no.uis.bigdata.hadoop.xml.xmlreader.XmlKeyInputFormat"
+             input-path="${input.path.xml}"
+             output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
+             combiner="no.uis.bigdata.hadoop.mapreduceexample.reducers.ContributorsStatisticsReduce"
+             mapper="no.uis.bigdata.hadoop.mapreduceexample.maps.xml.ContributorsStatisticsMap"
+             reducer="no.uis.bigdata.hadoop.mapreduceexample.reducers.ContributorsStatisticsReduce"
+            />
+
 </beans>
