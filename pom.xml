@@ -102,7 +102,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>no.uis.hadoop.hadoopinaction.book.MyJob</mainClass>
+                            <mainClass>no.uis.bigdata.hadoop.MainClass</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
