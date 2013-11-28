@@ -1,4 +1,4 @@
-package no.uis.bigdata.hadoop.common.model;
+package no.uis.bigdata.hadoop.xml.xmlreader;
 
 import javax.xml.bind.JAXBException;
 

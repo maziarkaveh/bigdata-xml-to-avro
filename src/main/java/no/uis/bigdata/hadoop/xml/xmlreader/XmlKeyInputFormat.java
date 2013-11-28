@@ -1,6 +1,5 @@
 package no.uis.bigdata.hadoop.xml.xmlreader;
 
-import no.uis.bigdata.hadoop.common.model.XMLConvertible;
 import no.uis.bigdata.hadoop.xml.model.XmlKey;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.InputSplit;

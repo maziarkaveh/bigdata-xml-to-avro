@@ -1,6 +1,5 @@
 package no.uis.bigdata.hadoop.xml.xmlreader;
 
-import no.uis.bigdata.hadoop.common.model.XMLConvertible;
 import no.uis.bigdata.hadoop.xml.model.XmlValue;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;

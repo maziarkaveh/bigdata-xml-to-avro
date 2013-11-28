@@ -27,7 +27,7 @@
              output-format="org.apache.avro.mapreduce.AvroKeyOutputFormat"
              input-format="no.uis.bigdata.hadoop.xml.xmlreader.XmlValueInputFormat"
              input-path="${input.path.xml}"
-             compress-output="false"
+             compress-output="true"
              output-path="${output.path}#{T(java.util.Calendar).getInstance().getTimeInMillis()}"
              mapper="no.uis.bigdata.hadoop.xml.mapreduce.MapClass"
              reducer="no.uis.bigdata.hadoop.xml.mapreduce.Reduce"

@@ -8,7 +8,7 @@
 
 package no.uis.bigdata.hadoop.common.model.jaxb;
 
-import no.uis.bigdata.hadoop.common.model.XMLConvertible;
+import no.uis.bigdata.hadoop.xml.xmlreader.XMLConvertible;
 import no.uis.bigdata.hadoop.common.model.jaxb.parser.XMLPageMarshaller;
 import no.uis.bigdata.hadoop.common.model.jaxb.parser.XMLPageUnMarshaller;
 

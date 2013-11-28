@@ -1,6 +1,6 @@
 package no.uis.bigdata.hadoop.xml.model;
 
-import no.uis.bigdata.hadoop.common.model.XMLConvertible;
+import no.uis.bigdata.hadoop.xml.xmlreader.XMLConvertible;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * Time: 17:19
  * To change this template use File | Settings | File Templates.
  */
-public class XmlWrapper<T extends XMLConvertible<T>> {
+public abstract class XmlWrapper<T extends XMLConvertible<T>> {
     private static final Logger log =
             LoggerFactory.getLogger(XmlWrapper.class);
     private T data;

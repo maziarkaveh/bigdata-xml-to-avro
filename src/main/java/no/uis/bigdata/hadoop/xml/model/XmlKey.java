@@ -1,6 +1,6 @@
 package no.uis.bigdata.hadoop.xml.model;
 
-import no.uis.bigdata.hadoop.common.model.XMLConvertible;
+import no.uis.bigdata.hadoop.xml.xmlreader.XMLConvertible;
 
 /**
  * Created with IntelliJ IDEA.
